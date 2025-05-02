@@ -35,7 +35,7 @@ from typing_extensions import Annotated, Self, deprecated
 
 from docling_core.search.package import VERSION_PATTERN
 from docling_core.types.base import _JSON_POINTER_REGEX
-from docling_core.types.doc import BoundingBox, Size
+from docling_core.types.doc import BoundingBox, BoundingRectangle, Size
 from docling_core.types.doc.base import ImageRefMode
 from docling_core.types.doc.labels import (
     CodeLanguageLabel,
@@ -607,7 +607,7 @@ class ProvenanceItem(BaseModel):
     """ProvenanceItem."""
 
     page_no: int
-    bbox: BoundingBox
+    bbox: Union[BoundingBox, BoundingRectangle]
     charspan: Tuple[int, int]
 
 
@@ -780,7 +780,7 @@ class DocItem(
             page_w, page_h = doc.pages[prov.page_no].size.as_tuple()
 
             loc_str = DocumentToken.get_location(
-                bbox=prov.bbox.to_top_left_origin(page_h).as_tuple(),
+                bbox=prov.bbox,
                 page_w=page_w,
                 page_h=page_h,
                 xsize=xsize,
