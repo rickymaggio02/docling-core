@@ -3885,7 +3885,7 @@ class DoclingDocument(BaseModel):
         add_table_cell_location: bool = False,
         add_table_cell_text: bool = True,
         minified: bool = False,
-        pages: Optional[list[int]] = None,
+        pages: Optional[set[int]] = None,
     ) -> str:
         r"""Exports the document content to a DocumentToken format.
 
@@ -3904,7 +3904,7 @@ class DoclingDocument(BaseModel):
         :param # table specific flagsadd_table_cell_location: bool
         :param add_table_cell_text: bool:  (Default value = True)
         :param minified: bool:  (Default value = False)
-        :param pages: list[int]: (Default value = None)
+        :param pages: set[int]: (Default value = None)
         :returns: The content of the document formatted as a DocTags string.
         :rtype: str
         """
